@@ -9,7 +9,7 @@
 #include <arpa/inet.h>
 
 #define IP_ADDR "127.0.0.1"
-#define PORT_NO 8080
+#define PORT_NO 9090
 
 #define INVALID_SOCKET -1
 
@@ -32,27 +32,30 @@ int main(int argc, char *argv[])
             char buffer[256] = {0};
             int n;
 
-            keyboard_read("Please enter the message: ", buffer, 255);
-
-            n = send_socket(sockfd, buffer, strlen(buffer));
-
-            if (n >= 0)
+            while(1)
             {
-                memset((void*) buffer, 0, 256);
-                n = recv_socket(sockfd, buffer, 256);
+                keyboard_read("Please enter the message: ", buffer, 255);
+
+                n = send_socket(sockfd, buffer, strlen(buffer));
 
                 if (n >= 0)
                 {
-                    printf("%s\n", buffer);
+                    memset((void*) buffer, 0, 256);
+                    n = recv_socket(sockfd, buffer, 256);
+
+                    if (n >= 0)
+                    {
+                        printf("%s\n", buffer);
+                    }
+                    else
+                    {
+                        perror("ERROR reading from socket");
+                    }
                 }
                 else
                 {
-                    perror("ERROR reading from socket");
+                    perror("ERROR writing to socket");
                 }
-            }
-            else
-            {
-                perror("ERROR writing to socket");
             }
         }
         else

@@ -98,7 +98,7 @@ int connect_socket(SOCKET* sock, char* ip, int port, int timeout_recv)
         serv_addr.sin_addr.s_addr = inet_addr(ip);
         serv_addr.sin_port = htons(port);
 
-        result = (connect(sock, (struct sockaddr*) &serv_addr, sizeof(serv_addr)) >= 0);
+        result = (connect(*sock, (struct sockaddr*) &serv_addr, sizeof(serv_addr)) >= 0);
     }
 
     return result;
