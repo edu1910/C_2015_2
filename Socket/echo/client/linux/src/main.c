@@ -8,7 +8,6 @@
 #include <sys/socket.h>
 #include <arpa/inet.h>
 
-#define IP_ADDR "127.0.0.1"
 #define PORT_NO 9090
 
 #define INVALID_SOCKET -1
@@ -27,7 +26,7 @@ int main(int argc, char *argv[])
 
     if (sockfd != INVALID_SOCKET)
     {
-        if (connect_socket(sockfd, IP_ADDR, PORT_NO, 10))
+        if (connect_socket(sockfd, argv[1], PORT_NO, 10))
         {
             char buffer[256] = {0};
             int n;

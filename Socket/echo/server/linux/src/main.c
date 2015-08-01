@@ -156,11 +156,14 @@ int do_processing(int sockfd)
         int read;
         char buffer[256] = {0};
 
-        if ((read = recv_socket(sockfd, buffer, 255)) >= 0)
+        if ((read = recv_socket(sockfd, buffer, 255)) > 0)
         {
             send_socket(sockfd, buffer, read);
             result = 1;
         }
+
+        if (read == 0)
+            errno = 0;
     }
 
     return result;
