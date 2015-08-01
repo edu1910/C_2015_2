@@ -27,6 +27,10 @@ int main(int argc, char** argv)
 
             printf("Lido: %s\n", msg);
         }
+        else
+        {
+            printf("Timeout!\n");   
+        }
     }
 
 	return 0;
